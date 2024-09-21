@@ -1,0 +1,27 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation Template for Elastic Beanstalk React Application'
+Resources:
+  ElasticBeanstalkApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    Properties:
+      ApplicationName: SimpleReactApplication
+      Description: Simple demo React application
+
+  ElasticBeanstalkEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    Properties:
+      ApplicationName: !Ref ElasticBeanstalkApplication
+      EnvironmentName: BeanstalkEnvironment
+      SolutionStackName: 64bit Amazon Linux 2023 v6.2.1 running Node.js 20
+      #https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html$0
+
+      OptionSettings:
+        - Namespace: aws:elasticbeanstalk:environment
+          OptionName: EnvironmentType
+          Value: SingleInstance
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: NODE_ENV
+          Value: 'dev'
+          # tells NodeJS we are worknig in a development environment.
+          # 
