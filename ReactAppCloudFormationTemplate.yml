@@ -1,0 +1,4 @@
+---
+# this fake deployment file is to get git.sync off my back as it expects every cloudformation template to have a deployment script. (configured into the gitsync).
+deploy:
+  artifact: placeholder.zip
