@@ -11,7 +11,7 @@ Resources:
           - Effect: Allow
             Principal:
               Service: ec2.amazonaws.com
-          Action: sts:AssumeRole
+            Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSElastickBeanstakService
         - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
@@ -25,7 +25,7 @@ Resources:
           - Effect: Allow
             Principal:
               Service: ec2.amazonaws.com
-          Action: sts:AssumeRole
+            Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
 
