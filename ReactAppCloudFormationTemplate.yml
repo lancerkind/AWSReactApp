@@ -54,7 +54,7 @@ Resources:
         - Namespace: aws:elasticbeanstalk:application:environment # tells NodeJS we are working in a development environment.
           OptionName: NODE_ENV
           Value: dev
-        - Namespace: aws:elasticbeansalk:environment
+        - Namespace: aws:elasticbeanstalk:environment
           OptionName: ServiceRole
           Value: !Ref ServiceRole
         - Namespace: aws:autoscaling:launchconfiguration
