@@ -23,5 +23,4 @@ Resources:
         - Namespace: aws:elasticbeanstalk:application:environment
           OptionName: NODE_ENV
           Value: 'dev'
-          # tells NodeJS we are worknig in a development environment.
-          # 
+          # tells NodeJS we are working in a development environment.
