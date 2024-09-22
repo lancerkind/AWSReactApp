@@ -13,7 +13,7 @@ Resources:
               Service: elasticbeanstalk.amazonaws.com
             Action: sts:AssumeRole
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSElastickBeanstakService
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstakService
         - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
 
   InstanceRole:
