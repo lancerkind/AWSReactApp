@@ -10,7 +10,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              Service: ec2.amazonaws.com
+              Service: elasticbeanstalk.amazonaws.com
             Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSElastickBeanstakService
@@ -24,7 +24,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              Service: ec2.amazonaws.com
+              Service: elasticbeanstalk.amazonaws.com
             Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
