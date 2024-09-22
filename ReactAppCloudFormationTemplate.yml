@@ -47,7 +47,6 @@ Resources:
       ApplicationName: !Ref ElasticBeanstalkApplication
       EnvironmentName: BeanstalkEnvironment
       SolutionStackName: 64bit Amazon Linux 2023 v6.2.1 running Node.js 20 #https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html$0
-      
       OptionSettings:
         - Namespace: aws:elasticbeanstalk:environment
           OptionName: EnvironmentType
