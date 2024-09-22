@@ -1,7 +1,42 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'CloudFormation Template for Elastic Beanstalk React Application'
+Description: CloudFormation Template for Elastic Beanstalk React Application
 Resources:
+  ServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -Effect: Allow
+          Principal:
+            Service:
+              -ec2.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSElastickBeanstakService
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
+
+  InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -Effect: Allow
+          Principal:
+            Service:
+              -ec2.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
+
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref InstanceRole
+
   ElasticBeanstalkApplication:
     Type: AWS::ElasticBeanstalk::Application
     Properties:
@@ -13,14 +48,19 @@ Resources:
     Properties:
       ApplicationName: !Ref ElasticBeanstalkApplication
       EnvironmentName: BeanstalkEnvironment
-      SolutionStackName: 64bit Amazon Linux 2023 v6.2.1 running Node.js 20
-      #https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html$0
-
+      SolutionStackName: 64bit Amazon Linux 2023 v6.2.1 running Node.js 20 #https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html$0
+      
       OptionSettings:
         - Namespace: aws:elasticbeanstalk:environment
           OptionName: EnvironmentType
           Value: SingleInstance
-        - Namespace: aws:elasticbeanstalk:application:environment
+        - Namespace: aws:elasticbeanstalk:application:environment # tells NodeJS we are working in a development environment.
           OptionName: NODE_ENV
-          Value: 'dev'
-          # tells NodeJS we are working in a development environment.
+          Value: dev
+        - Namespace: aws:elasticbeansalk:environment
+          OptionName: ServiceRole
+          Value: !Ref ServiceRole
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: IamInstanceProfile
+          Value: !Ref InstanceProfile
+          
